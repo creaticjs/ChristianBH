@@ -141,21 +141,20 @@ function getUrls(url)
             allData.push(datos.results)
             allData.forEach(function(pages){
                 pages.forEach(function(planets){
-                    cardPlanet += "<div class=\"col-sm-6 col-lg-4 mt-2\">"+
-                                    "<div class=\"card\">"+
-                                        "<img class=\"card-img-top width=100%;\" src=\""+planetas[i]+"\" alt=\"Card image cap\">"+
-                                        "<div class=\"card-body\">"+
-                                            "<h4 class=\"card-title\">"+planets.name+"</h4>"+
-                                            "<p class=\"card-text\">"+
-                                            "<p>Clima:"+ planets.climate +"</p>"+
-                                            "<p>Terreno:"+ planets.terrain+"</p>"+
-                                            "<p>Gravity:"+ planets.gravity+"</p>"+
-                                            
-                                            "</p>"+
-                                            "<a href=\"#!\" class=\"btn btn-primary\">Ver Detalles</a>"+
-                                        "</div>"+
-                                    "</div>"+
-                                 "</div>"
+                cardPlanet += `<div class="col-sm-6 col-lg-4 mt-2">
+                                    <div class="card">                                       
+                                        <img class="card-img-top" style="height:550px;" src=${planetas[i]} alt="Card image cap">                       
+                                        <div class="card-body">
+                                            <h4 class="card-title">${planets.name}</h4>
+                                            <p class="card-text">
+                                            <p>Clima:${ planets.climate }</p>
+                                            <p>Terreno:${ planets.terrain}</p>
+                                            <p>Gravity:${ planets.gravity}</p>                                           
+                                            </p>
+                                            <a href="#!" class="btn btn-primary">Ver Detalles</a>
+                                        </div>
+                                    </div>
+                                </div>`
                     i += 1;
                 });
             });
