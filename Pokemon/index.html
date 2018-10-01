@@ -4,50 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pokemon</title>
+    <title>Pokémon</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
     <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Ubuntu+Condensed" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <link rel="stylesheet" href="css/tarjetaPoke.css"/>
 
-    <style>
-        h1,h2,h3,h4 {
-            font-family: 'Gloria Hallelujah';
-        }
-    </style>
 </head>
 <body>
     
     <div class="d-flex justify-content-center">
-        <h1 style="color: rgb(185, 48, 48);">Pokémon</h1>
+        <h1 id="title">Pokémon</h1>
     </div>
-    <div class="row" id="contenido">   
-       <div class="col-lg-3 mt-5">
-            <div class="d-flex justify-content-center">
-                <div class="border border-dark post-container" style="background-color:silver;">
-                    <h4 class="text-center">Bulbasaur</h4>
-                    <div class="d-flex justify-content-center border border-info post-container ml-1 mr-1" style="background-color:black;">
-                        <img style="width:50%; height:50%" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" alt="Card image">
-                    </div>
-                    <div class="m-3 justify-text">
-                        <p>Peso: 69 kg</p>
-                        <p>Habilidades:  <small> <br> chlorophll </small></p>
-                        
-                        <p class="card-text">This Pokémon's Speed is <br> doubled during strong sunlight..</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="text-center mt-5" id="cargando">
+        <h2>CARGANDO...</h2>
+        <img src="img/loading.gif" alt="">
+    </div>
+    <div class="row" id="contenido" style="background-color: #343a40;">  
+        
+    </div>
 
-    </div>
+    
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script src="peticion.js">
-    </script>
-    <script src="species.js">
-    </script>
+    <script src="peticion.js"></script>
+    <script src="species.js"></script>
 </body>
 </html>
