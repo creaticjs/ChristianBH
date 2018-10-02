@@ -86,7 +86,7 @@ function renderTarget(data, color)
         pokeCard +=`<div class="col-lg-3 col-sm-6 mt-5">
             <div class="d-flex justify-content-center">
                 <div id="tarjet-out">
-                    <div id="tarjet-in" style="background-image: url(/img/${color}.jpg); color:${colorWord};">
+                    <div id="tarjet-in" style="background-image: url(../Pokemon/img/${color}.jpg); color:${colorWord};">
                         <h4 class="text-center">${data.name}</h4>
                         <div class="img-bg">
                             <img id="poke-img" src=${data.sprites.front_default} alt="Card image">
