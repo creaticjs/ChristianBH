@@ -2,9 +2,13 @@
 urlPokemons = [];
 var pokeCard ='';
 var contenido = document.getElementById('contenido');
+var searchdiv = document.getElementById("searchdiv");
+var search = document.getElementById("search");
+search.addEventListener("keyup",searchPoke);
 var i = 0;
 var datos1 = [];
 var color = [];
+var AllPokemons=[];
 
 
 function getPeticion(url){
@@ -24,6 +28,7 @@ function getPeticion(url){
 }
 
 poke = 'https://pokeapi.co/api/v2/pokemon/:id/'
+$("#searchdiv").hide();
 
 for (var i= 1; i<300; i++)
 {
@@ -33,7 +38,6 @@ for (var i= 1; i<300; i++)
 
 Promise.all(urlPokemons)
 .then(functionDone)
-
 function functionDone(dataBase)
 {
     dataBase.forEach(data => {
@@ -46,9 +50,11 @@ function functionDone(dataBase)
             }
             else
             {
+                AllPokemons = dataBase;
                 $("#cargando").hide()
                 contenido.innerHTML = pokeCard;
                 $("#contenido").show()
+                $("#searchdiv").show();
   
             }
         })
@@ -56,10 +62,35 @@ function functionDone(dataBase)
         
 }
 
+searchPoke();
 
-function getSpecies(data)
+function searchPoke()
 {
-    console.log(data[0].name)
+    pokeCard = ''
+    var query1 = Enumerable.From(AllPokemons)
+                .Where('!!($.name).toLowerCase().match(/^'+$("#search").val()+'/)')
+                .ToArray();
+    console.log($("#search").val())
+    console.log(query1)
+
+    query1.forEach(element => {
+        $("#contenido").hide()
+
+        getPeticion(element.species.url)
+        .then(function(specie){
+                
+                color.push(specie.color.name)
+                renderTarget(element,specie.color.name)
+                contenido.innerHTML = pokeCard;
+                $("#contenido").show()
+                
+        }) 
+        
+    });
+    
+
+
+    
 }
 
 function functionFail(ERR)
@@ -85,7 +116,7 @@ function renderTarget(data, color)
     
         pokeCard +=`<div class="col-lg-3 col-sm-6 mt-5">
             <div class="d-flex justify-content-center">
-                <div id="tarjet-out">
+                <div class="tarjet-out">
                     <div id="tarjet-in" style="background-image: url(../Pokemon/img/${color}.jpg); color:${colorWord};">
                         <h4 class="text-center">${data.name}</h4>
                         <div class="img-bg">

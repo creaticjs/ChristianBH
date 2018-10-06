@@ -9,11 +9,13 @@ body{
     color: red;
 }
 
-#tarjet-out{
+.tarjet-out{
     margin: 0%;
     border: 13px solid rgb(215, 192, 79);
     border-radius: 20px;
+    transition: transform 2s;
 }
+
 #tarjet-in{
     padding: 10px;
     color: rgb(46, 15, 131);
@@ -26,13 +28,17 @@ body{
 
 .img-bg #poke-img{
    
-    margin: 10px 50px;
-    
+    margin: 10px 50px; 
 }
 
 #tarjet-in .justify-text p{
     font-weight: 600;
     border: 2px;
     border-bottom: 1px solid;
+}
+
+#searchdiv{
+    display: flex;
+    justify-content: center;
 }
 
