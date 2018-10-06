@@ -58,39 +58,39 @@ function functionDone(dataBase)
   
             }
         })
-    });
-        
+    });   
 }
 
 searchPoke();
 
 function searchPoke()
 {
-    pokeCard = ''
-    var query1 = Enumerable.From(AllPokemons)
-                .Where('!!($.name).toLowerCase().match(/^'+$("#search").val()+'/)')
-                .ToArray();
-    console.log($("#search").val())
-    console.log(query1)
+    if($("#search").val()=="")
+    {
+        $("#contenidoSearch").hide()
+        $("#contenido").show()
+    }
+    else{
+        pokeCard = ''
+        $("#contenido").hide();
 
-    query1.forEach(element => {
-        $("#contenido").hide()
-
-        getPeticion(element.species.url)
-        .then(function(specie){
-                
-                color.push(specie.color.name)
-                renderTarget(element,specie.color.name)
-                contenido.innerHTML = pokeCard;
-                $("#contenido").show()
-                
-        }) 
-        
-    });
+        var query1 = Enumerable.From(AllPokemons)
+                    .Where('!!($.name).toLowerCase().match(/^'+$("#search").val()+'/)')
+                    .ToArray();
     
-
-
+        query1.forEach(element => {
+            $("#contenido").hide()
     
+            getPeticion(element.species.url)
+            .then(function(specie){    
+                    color.push(specie.color.name)
+                    renderTarget(element,specie.color.name)
+                    $("#contenidoSearch").html(pokeCard);
+                    $("#contenidoSearch").show()          
+            })    
+        });
+    }
+
 }
 
 function functionFail(ERR)
@@ -100,7 +100,6 @@ function functionFail(ERR)
 
 function renderTarget(data, color)
 {
-   
         var abil = '';
         var color = color;
         var colorWord = 'black';
@@ -134,5 +133,4 @@ function renderTarget(data, color)
                 </div>
             </div>
         </div>`    
-    
 } 
