@@ -30,7 +30,7 @@ function getPeticion(url){
 poke = 'https://pokeapi.co/api/v2/pokemon/:id/'
 $("#searchdiv").hide();
 
-for (var i= 1; i<300; i++)
+for (var i= 1; i<=500; i++)
 {
     pokeUrl = poke.replace(":id",i) 
     urlPokemons.push(getPeticion(pokeUrl));
@@ -46,7 +46,7 @@ function functionDone(dataBase)
             if(color.length < dataBase.length-1)
             {
                 color.push(specie.color.name)
-                renderTarget(data,specie.color.name)
+                renderTarget(data,specie)
             }
             else
             {
@@ -55,7 +55,6 @@ function functionDone(dataBase)
                 contenido.innerHTML = pokeCard;
                 $("#contenido").show()
                 $("#searchdiv").show();
-  
             }
         })
     });   
@@ -71,6 +70,7 @@ function searchPoke()
         $("#contenido").show()
     }
     else{
+        
         pokeCard = ''
         $("#contenido").hide();
 
@@ -79,14 +79,14 @@ function searchPoke()
                     .ToArray();
     
         query1.forEach(element => {
-            $("#contenido").hide()
+           
     
             getPeticion(element.species.url)
             .then(function(specie){    
                     color.push(specie.color.name)
-                    renderTarget(element,specie.color.name)
+                    renderTarget(element,specie)
                     $("#contenidoSearch").html(pokeCard);
-                    $("#contenidoSearch").show()          
+                    $("#contenidoSearch").show(); 
             })    
         });
     }
@@ -98,11 +98,12 @@ function functionFail(ERR)
     console.log('Error')
 }
 
-function renderTarget(data, color)
+function renderTarget(data, specie)
 {
         var abil = '';
-        var color = color;
+        var color = specie.color.name;
         var colorWord = 'black';
+        var txt = specie.flavor_text_entries[3].flavor_text;
 
         if(color != 'white')
         {
@@ -110,27 +111,56 @@ function renderTarget(data, color)
         }
     
         data.abilities.forEach(element =>{
-            abil += `<li> ${element.ability.name} </li>`
+            abil += `<li style="border-bottom: 2px solid ${color};" class="item"> ${element.ability.name} </li>`
         })
-    
+        
         pokeCard +=`<div class="col-lg-3 col-sm-6 mt-5">
             <div class="d-flex justify-content-center">
                 <div class="tarjet-out">
                     <div id="tarjet-in" style="background-image: url(../Pokemon/img/${color}.jpg); color:${colorWord};">
-                        <h4 class="text-center">${data.name}</h4>
+                        <h4 class="text-center">${data.name.charAt(0).toUpperCase()+data.name.slice(1)}</h4>
                         <div class="img-bg">
                             <img id="poke-img" src=${data.sprites.front_default} alt="Card image">
                         </div>
-                        <div class="justify-text">
-                            <p>Peso: ${data.weight/10} kg</p>
-                            
-                            <p>Habilidades:  <small> <br>
-                            ${abil}
+                        <div class="justify-text" style="border-bottom: 2px solid ${color};">
+                            <div class="d-flex justify-content-around">
+                                <p style="border-bottom: 2px solid ${color};" class="item"> Peso: ${data.weight/10} kg <br><br></p>
+                                <p style="border-bottom: 2px solid ${color};" class="item"> Expriencia: ${data.base_experience} <br><br></p> 
+                                <p style="border-bottom: 2px solid ${color};" class="item"> Altura: ${data.height/10} m </p>  
+                            </div>
+
+                            <p style="border-bottom: 2px solid ${color};" class="item">Catergoria: ${specie.genera[4].genus} </p>
+                            <p style="border-bottom: 2px solid ${color};" class="item">Habilidades:  <small> <br>
+                                ${abil}
                             </small></p>
-                            <p class="card-text">This Pokémon's Speed is <br> doubled during strong sunlight..</p>
+
+                            <p class="item" id=poke${data.id}on > ${txt.substring(0,50)}
+                                <a onclick=hide(${data.id}) style="color:blue"> Leer mas.. <a/>
+                            </p>
+
+                            <p class="item" id=poke${data.id}off style="display: none;">${txt}
+                                <a onclick=hide(${data.id}) style="color:blue"> Leer menos <a/>
+                            </p>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </div>`    
+        </div>` 
+
 } 
+
+function hide(id)
+{
+    if(document.getElementById("poke"+id+"off").style.display == 'none')
+    {
+   
+        $("#poke"+id+"off").show();
+        $("#poke"+id+"on").hide();
+    }
+    else{
+        $("#poke"+id+"on").show();
+        $("#poke"+id+"off").hide();
+    }
+    
+}

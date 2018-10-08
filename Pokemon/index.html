@@ -6,37 +6,42 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pokémon</title>
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
-    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Ubuntu+Condensed" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css"/>
-    <link rel="stylesheet" href="css/tarjetaPoke.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <link rel="stylesheet" href="css/tarjetaPoke.css"/> 
 
 </head>
 <body>
     
     <div class="d-flex justify-content-center">
-        <h1 id="title">Pokémon</h1>
+        
+        <img id="title" src="img/logo.png" alt="">
+        
     </div>
     <div class="text-center mt-5" id="cargando">
         <h2>CARGANDO...</h2>
         <img src="img/loading.gif" alt="">
     </div>
+    
     <div id="searchdiv">
         <input id= "search" type="text" value="" class="form-control" placeholder="Buscar Pokémon">
     </div>
     
-    <div class="row" id="contenido" style="background-color: #343a40;">  
-        
+    <div class="row" id="contenido" style="background-color: #343a40;">       
     </div>
-    <div class="row" id="contenidoSearch" style="background-color: #343a40;">  
-        
+
+
+
+    <div class="row" id="contenidoSearch" style="background-color: #343a40;">      
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/linq.js/2.2.0.2/linq.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
     <script src="peticion.js"></script>
-    <script src="species.js"></script>
+    
 </body>
 </html>
