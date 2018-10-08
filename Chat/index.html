@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    
+</head>
+<body>
+
+    <h1 class="d-flex justify-content-center">Chat Users 1 y 2</h1>
+
+    <div class="d-flex justify-content-around">
+        <div class="row">
+            <div class="col-md-6 col-lg-6 col-sm-6 border border-dark">
+                <h2 class="d-flex justify-content-around">User 1</h2>
+                <div id="mensajesU1" class="container">
+
+                </div>
+
+                <div class="row mt-3">
+                    <div class="input-group">
+                        <input id="textoMsgU1" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                        <div class="input-group-append">
+                            <button id="enviarU1" class="btn btn-success" type="button">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6 col-lg-6 col-sm-6 border border-dark">
+                <h2 class="d-flex justify-content-around">User 2</h2>
+                <div id="mensajesU2" class="container">
+                    
+                </div>
+                <div class="row mt-3">
+                    <div class="input-group">
+                        <input id="textoMsgU2" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                        <div class="input-group-append">
+                            <button id="enviarU2" class="btn btn-success" type="button">Enviar</button>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyC0-04_skF5hgWs56fFlV90M6fi3LiHgZg",
+        authDomain: "creaticchat-6de60.firebaseapp.com",
+        databaseURL: "https://creaticchat-6de60.firebaseio.com",
+        projectId: "creaticchat-6de60",
+        storageBucket: "creaticchat-6de60.appspot.com",
+        messagingSenderId: "760742228842"
+    };
+    firebase.initializeApp(config);
+
+    var DBmsgU1 = firebase.database().ref('mensajesU1');
+    DBmsgU1.on('child_added', function(data){
+        $('#mensajesU1').append(`<div class="row d-flex justify-content-start">
+                                <div  class="border border-success">
+                                    <li>${data.val().body}</li>
+                                </div>
+                            </div>`
+                            );
+    })
+    DBmsgU1.on('child_added', function(data){
+        $('#mensajesU2').append(`<div class="row d-flex justify-content-end">
+                                <div  class="border border-warning">
+                                    <p>${data.val().body}</p>
+                                </div>
+                            </div>`
+                            );
+    })
+
+    $('#enviarU1').on('click',enviarMSG1);
+
+    $('#textoMsgU1').on('keypress',function(e){
+        console.log(e.which)
+        if(e.which == 13){
+            enviarMSG1();
+        }
+    });
+
+    function enviarMSG1(){
+        console.log('Enviar mensaje')
+        DBmsgU1.push().set({body: $('#textoMsgU1').val()})
+        $('#textoMsgU1').val('');
+    }
+
+
+
+
+    var DBmsgU2 = firebase.database().ref('mensajesU2');
+    DBmsgU2.on('child_added', function(data){
+        $('#mensajesU1').append(`<div class="row d-flex justify-content-end">
+                                    <div  class="border border-warning">
+                                        <p>${data.val().body}</p>
+                                    </div>
+                                </div>`
+                                );
+    })
+    DBmsgU2.on('child_added', function(data){
+        $('#mensajesU2').append(`<div class="row d-flex justify-content-start">
+                                <div  class="border border-success">
+                                    <li>${data.val().body}</li>
+                                </div>
+                            </div>`
+                            );
+    })
+
+    $('#enviarU2').on('click',enviarMSG2);
+
+    $('#textoMsgU2').on('keypress',function(e){
+        console.log(e.which)
+        if(e.which == 13){
+            enviarMSG2();
+        }
+    });
+
+    function enviarMSG2(){
+        console.log('Enviar mensaje2')
+        DBmsgU2.push().set({body: $('#textoMsgU2').val()})
+        $('#textoMsgU2').val('');
+    }
+
+    </script>
+    
+</body>
+</html>
