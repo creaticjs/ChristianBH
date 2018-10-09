@@ -30,7 +30,7 @@ function getPeticion(url){
 poke = 'https://pokeapi.co/api/v2/pokemon/:id/'
 $("#searchdiv").hide();
 
-for (var i= 1; i<=500; i++)
+for (var i= 1; i<=50; i++)
 {
     pokeUrl = poke.replace(":id",i) 
     urlPokemons.push(getPeticion(pokeUrl));
@@ -69,8 +69,7 @@ function searchPoke()
         $("#contenidoSearch").hide()
         $("#contenido").show()
     }
-    else{
-        
+    else{       
         pokeCard = ''
         $("#contenido").hide();
 
@@ -154,9 +153,12 @@ function hide(id)
 {
     if(document.getElementById("poke"+id+"off").style.display == 'none')
     {
-   
+        var msg  = new SpeechSynthesisUtterance();
+        msg.lang = "es";
         $("#poke"+id+"off").show();
         $("#poke"+id+"on").hide();
+        msg.text = $("#poke"+id+"off").text().replace("Leer menos","");
+        speechSynthesis.speak(msg);
     }
     else{
         $("#poke"+id+"on").show();
