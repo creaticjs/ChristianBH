@@ -1,0 +1,14 @@
+<h3>Mascotas 🐾</h3>
+<div class="row">
+  <div class="" *ngIf="verMensaje">
+    <p>Hola amigos</p>
+  </div>
+</div>
+<div>
+  <ng-container *ngFor="let pet of pets; let i = index">
+    <p>{{i+1}} {{pet.nombre}} {{emojiPet(pet.tipo)}}</p>
+  </ng-container>
+</div>
+<button (click)="showMensaje()">Ver mensaje</button>
+<p>Nombre {{ pets[0].nombre }}</p>
+
