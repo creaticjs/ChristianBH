@@ -8,7 +8,7 @@ const rl = readline.createInterface({
 
 console.log("Aqui podras calcular el tiempo y velocidad de un objeto en caida libre. ")
 
-rl.question('Ingrese la altura del edificio: ', (h) => {
+rl.question('Ingrese la altura del edificio en metros: ', (h) => {
 
     var t = data.t(h,data.g).toFixed(2);
     console.log("El tiempo de caida es: "+t+" s");
